@@ -99,9 +99,9 @@ fun thirdDigit(number: Int): Int = number/100%10
  * Определите время поезда в пути в минутах (в данном случае 216).
  */
 fun travelMinutes(hoursDepart: Int, minutesDepart: Int, hoursArrive: Int, minutesArrive: Int): Int {
-    val x = hoursDepart * 60 + minutesDepart
-    val x1 = hoursArrive * 60 + minutesArrive
-    return x1-x
+    val departInMinutes = hoursDepart * 60 + minutesDepart
+    val arriveInMinutes = hoursArrive * 60 + minutesArrive
+    return arriveInMinutes - departInMinutes
 }
 
 /**
@@ -123,8 +123,8 @@ fun accountInThreeYears(initial: Int, percent: Int): Double {
  *Необходимо вывести число, полученное из заданного перестановкой цифр в обратном порядке (например, 874).
  */
 fun numberRevert(number: Int): Int {
-    val x1 = number%10 * 100
-    val x2 = number%100 / 10 * 10
+    val x1 = number % 10 * 100
+    val x2 = number % 100 / 10 * 10
     val x3 = number / 100
-    return x1 + x2+ x3
+    return x1 + x2 + x3
 }
