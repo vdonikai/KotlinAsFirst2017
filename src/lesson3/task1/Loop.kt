@@ -94,11 +94,9 @@ fun fib(n: Int): Int {
  */
 fun lcm(m: Int, n: Int): Int {
     var k = 0
-    for (i in 1..Int.MAX_VALUE) {
-        when {
-            ((i % n) == 0) && ((i % m) == 0) -> k = i
-        }
-        if (k == i) break
+    for (i in max(m,n)..Int.MAX_VALUE) {
+        k = i
+        if (((i % n) == 0) && ((i % m) == 0)) break
     }
     return k
 }
