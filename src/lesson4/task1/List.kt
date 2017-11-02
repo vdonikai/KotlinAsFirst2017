@@ -259,7 +259,8 @@ fun convert(n: Int, base: Int): List<Int> {
  */
 fun convertToString(n: Int, base: Int): String {
     if (n == 0) return "0"
-    val latinChars = listOf("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
+    val latinChars = listOf("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
+            "s", "t", "u", "v", "w", "x", "y", "z")
     val list = mutableListOf<String>()
     var num = n
     while (num >= 1) {
@@ -277,9 +278,17 @@ fun convertToString(n: Int, base: Int): String {
  *
  * Перевести число, представленное списком цифр digits от старшей к младшей,
  * из системы счисления с основанием base в десятичную.
- * Например: digits = (1, 3, 12), base = 14 -> 250
+ * Например: digits = (1, 3, 12), base = 14 -> 250  1 2 1 0
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    val digit = digits.toMutableList()
+    var num = 0
+    for (i in 0..(digits.size-1)) {
+        num += digit.last() * pow(base.toDouble(), i.toDouble()).toInt()
+        digit.removeAt(digit.size-1)
+    }
+    return num
+}
 
 /**
  * Сложная
