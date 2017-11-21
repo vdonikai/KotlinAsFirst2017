@@ -80,10 +80,14 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    return when {
-        (n == 1) || (n == 2) -> 1
-        else -> fib(n-1) + fib(n-2)
+    var num = 1
+    var k = num
+    for (i in 3..n) {
+        val numVal = num
+        num += k
+        k = numVal
     }
+    return num
 }
 
 /**
@@ -93,12 +97,11 @@ fun fib(n: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var k = 0
-    for (i in max(m,n)..Int.MAX_VALUE) {
-        k = i
-        if (((i % n) == 0) && ((i % m) == 0)) break
+    val max = max(m,n)
+    for (i in max..m*n step max) {
+        if (((i % n) == 0) && ((i % m) == 0)) return i
     }
-    return k
+    return -1
 }
 
 /**
@@ -107,12 +110,10 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var divisor = 0
-    for (i in 2..Int.MAX_VALUE) {
-        divisor = i
-        if (n % divisor == 0) break
+    for (i in 2..n) {
+        if (n % i == 0) return i
     }
-    return divisor
+    return -1
 }
 
 /**
@@ -121,14 +122,10 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    var divisor = 0
-    for (i in (n-1) downTo 1) {
-        when {
-            n % i == 0 && i < n -> divisor = i
-        }
-        if (divisor == i) break
+    for (i in n/2 downTo 1) {
+        if (n % i == 0) return i
     }
-    return divisor
+    return -1
 }
 
 /**
@@ -185,7 +182,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Не использовать строки при решении задачи.
  */
 fun revert(n: Int): Int {
-    val count = (n.toString()).length
+    val count = count(n)
     var numberRevert = 0
     var number = n
     for (i in 1..count) {
@@ -249,3 +246,17 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
 fun fibSequenceDigit(n: Int): Int = TODO()
+
+/**Раз уж нельзя использовать строки даже в нахождении кол-ва цифр, то, пожалуй,
+ * я верну то, что было до того, как я нашёл более оптимальный способ.
+ */
+fun count (n: Int): Int {
+    var num = n
+    var count = 0
+    while (num != 0) {
+        num /= 10
+        count++
+    }
+    return count
+}
+
