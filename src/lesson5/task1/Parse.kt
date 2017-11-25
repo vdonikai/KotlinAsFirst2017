@@ -77,14 +77,14 @@ fun dateStrToDigit(str: String): String = TODO()
  */
 fun dateDigitToStr(digital: String): String {
     val elements = digital.split(".")
+    if (elements.size > 3) return ""
     val months = listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября",
             "ноября", "декабря")
     val list = mutableListOf<String>()
     try{
-        if ((elements[0].toInt() >= 0) && (elements[0].toInt() <= 31)) list.add((elements[0].toInt()).toString())
+        if ((elements[0].toInt() >= 0) && (elements[0].toInt() <= 31)) list.add(elements[0].toInt().toString())
         list.add(months[elements[1].toInt() - 1])
-        if (elements[2].length == 4) list.add(elements[2])
-        else return ""
+        list.add(elements[2].toInt().toString())
     }
     catch (e: Exception) {
         return ""
