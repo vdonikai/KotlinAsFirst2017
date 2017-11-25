@@ -155,7 +155,7 @@ fun mostExpensive(description: String): String {
     for (midPart in bigParts) {
         try{
             val parts = midPart.split(" ")
-            if (parts[1].toDouble() > max) {
+            if (parts[1].toDouble() >= max) {
                 max = parts[1].toDouble()
                 maxItem = parts[0]
             }
