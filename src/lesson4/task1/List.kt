@@ -3,6 +3,7 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson1.task1.sqr
+import lesson3.task1.isPrime
 import java.lang.Math.*
 
 /**
@@ -214,7 +215,7 @@ fun factorize(n: Int): List<Int> {
     val list = mutableListOf<Int>()
     var number = n
     var divisor = 2
-    while (number > 1) {
+    while (isPrime(number).not()) {
         if (number % divisor == 0) {
             list.add(divisor)
             number /= divisor
@@ -222,6 +223,7 @@ fun factorize(n: Int): List<Int> {
         }
         divisor++
     }
+    list.add(number)
     return list.sorted()
 }
 
@@ -244,7 +246,7 @@ fun convert(n: Int, base: Int): List<Int> {
     if (n == 0) return listOf(0)
     val list = mutableListOf<Int>()
     var num = n
-    while (num >= 1) {
+    while (num > 0) {
         list.add(0, (num % base))
         num /= base
     }
@@ -283,11 +285,9 @@ fun convertToString(n: Int, base: Int): String {
  * Например: digits = (1, 3, 12), base = 14 -> 250  1 2 1 0
  */
 fun decimal(digits: List<Int>, base: Int): Int {
-    val digit = digits.toMutableList()
     var num = 0
     for (i in 0..(digits.size-1)) {
-        num += digit.last() * pow(base.toDouble(), i.toDouble()).toInt()
-        digit.removeAt(digit.size-1)
+        num += digits[(digits.size-1) - i] * pow(base.toDouble(), i.toDouble()).toInt()
     }
     return num
 }
