@@ -111,8 +111,8 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
 fun abs(v: List<Double>): Double {
     var sum = 0.0
     if (v.isEmpty()) return 0.0
-    for (i in 0..(v.size-1)) {
-        sum += sqr(v[i])
+    for (i in v) {
+        sum += sqr(i)
     }
     return sqrt(sum)
 }
@@ -137,7 +137,7 @@ fun mean(list: List<Double>): Double {
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
     if (list.isEmpty()) return list
-    val mean = (list.sum() / list.size)
+    val mean = mean(list)
     for (i in 0..(list.size-1)) {
         list[i] -= mean
     }
@@ -153,7 +153,7 @@ fun center(list: MutableList<Double>): MutableList<Double> {
  */
 fun times(a: List<Double>, b: List<Double>): Double {
     var c = 0.0
-    if (a.isEmpty() || b.isEmpty()) return 0.0
+    if (a.isEmpty()) return 0.0
     for (i in 0..(a.size-1)) {
         c += a[i] * b[i]
     }
@@ -170,9 +170,11 @@ fun times(a: List<Double>, b: List<Double>): Double {
  */
 fun polynom(p: List<Double>, x: Double): Double {
     if (p.isEmpty()) return 0.0
-    var sum = p[0]
-    for (i in 1..(p.size-1)) {
-        sum += p[i] * pow(x,i.toDouble())
+    var sum = 0.0
+    var X = 1.0
+    for (i in p) {
+        sum += i * X
+        X *= x
     }
     return sum
 }
