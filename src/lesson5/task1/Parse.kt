@@ -175,10 +175,10 @@ fun firstDuplicateIndex(str: String): Int {
     val list = str.split(" ")
     var index = -1
     try{
-        for (i in 0 until list.size step 2) {
+        for (i in 0 until list.size) {
             index++
             if (list[i].toLowerCase() == list[i + 1].toLowerCase()) return index
-            index += list[i].length + list[i + 1].length + 1
+            index += list[i].length
         }
     }
     catch (e: Exception) {
