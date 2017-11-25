@@ -2,6 +2,7 @@
 package lesson3.task1
 
 
+import lesson1.task1.sqr
 import java.lang.Math.*
 
 /**
@@ -98,8 +99,8 @@ fun fib(n: Int): Int {
  */
 fun lcm(m: Int, n: Int): Int {
     val max = max(m,n)
-    for (i in max..m*n step max) {
-        if (((i % n) == 0) && ((i % m) == 0)) return i
+    for (i in max..(m * n) step max) {
+        if (i % min(m,n) == 0) return i
     }
     return -1
 }
@@ -110,6 +111,7 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
+    if (isPrime(n)) return n
     for (i in 2..n) {
         if (n % i == 0) return i
     }
@@ -122,7 +124,7 @@ fun minDivisor(n: Int): Int {
  * Для заданного числа n > 1 найти максимальный делитель, меньший n
  */
 fun maxDivisor(n: Int): Int {
-    for (i in n/2 downTo 1) {
+    for (i in (n / 2) downTo 1) {
         if (n % i == 0) return i
     }
     return -1
@@ -152,7 +154,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean {
     for (i in 0..Math.sqrt(n.toDouble()).toInt()) {
-        if ((i*i) <= n && (i*i) >= m) return true
+        if (sqr(i.toDouble()) >= m) return true
     }
     return false
 }
@@ -182,7 +184,7 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Не использовать строки при решении задачи.
  */
 fun revert(n: Int): Int {
-    val count = count(n)
+    val count = digitNumber(n)
     var numberRevert = 0
     var number = n
     for (i in 1..count) {
@@ -218,9 +220,8 @@ fun isPalindrome(n: Int): Boolean {
  */
 fun hasDifferentDigits(n: Int): Boolean {
     if (n in 0..9) return false
-    var num = n
+    var num = n /10
     val digitFirst = n % 10
-    num /= 10
     while (num > 0) {
         val digit = num % 10
         if (digit != digitFirst) return true
@@ -246,17 +247,3 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
 fun fibSequenceDigit(n: Int): Int = TODO()
-
-/**Раз уж нельзя использовать строки даже в нахождении кол-ва цифр, то, пожалуй,
- * я верну то, что было до того, как я нашёл более оптимальный способ.
- */
-fun count (n: Int): Int {
-    var num = n
-    var count = 0
-    while (num != 0) {
-        num /= 10
-        count++
-    }
-    return count
-}
-
