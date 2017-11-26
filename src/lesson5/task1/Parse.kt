@@ -80,11 +80,11 @@ fun dateStrToDigit(str: String): String = TODO()
 fun dateDigitToStr(digital: String): String {
     val elements = digital.split(".")
     if (elements.size != 3) return ""
-    val firstElement = elements[0].toInt()
     val months = listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября",
             "ноября", "декабря")
     val list = mutableListOf<String>()
     try{
+        val firstElement = elements[0].toInt()
         if ((firstElement >= 0) && (firstElement <= 31)) list.add(firstElement.toString())
         list.add(months[elements[1].toInt() - 1])
         list.add(elements[2].toInt().toString())
@@ -178,7 +178,7 @@ fun firstDuplicateIndex(str: String): Int {
     val list = str.toLowerCase().split(" ")
     if (list.size == 1) return -1
     var index = -1
-    for (i in 0 until list.size) {
+    for (i in 0 until list.size - 1) {
         index++
         if (list[i] == list[i + 1]) return index
         index += list[i].length
