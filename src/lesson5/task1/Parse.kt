@@ -1,6 +1,8 @@
 @file:Suppress("UNUSED_PARAMETER")
 package lesson5.task1
 
+import java.lang.Math.*
+
 /**
  * Пример
  *
@@ -77,12 +79,13 @@ fun dateStrToDigit(str: String): String = TODO()
  */
 fun dateDigitToStr(digital: String): String {
     val elements = digital.split(".")
-    if (elements.size > 3) return ""
+    if (elements.size != 3) return ""
+    val firstElement = elements[0].toInt()
     val months = listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября",
             "ноября", "декабря")
     val list = mutableListOf<String>()
     try{
-        if ((elements[0].toInt() >= 0) && (elements[0].toInt() <= 31)) list.add(elements[0].toInt().toString())
+        if ((firstElement >= 0) && (firstElement <= 31)) list.add(firstElement.toString())
         list.add(months[elements[1].toInt() - 1])
         list.add(elements[2].toInt().toString())
     }
@@ -172,17 +175,13 @@ fun plusMinus(expression: String): Int {
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
 fun firstDuplicateIndex(str: String): Int {
-    val list = str.split(" ")
+    val list = str.toLowerCase().split(" ")
+    if (list.size == 1) return -1
     var index = -1
-    try{
-        for (i in 0 until list.size) {
-            index++
-            if (list[i].toLowerCase() == list[i + 1].toLowerCase()) return index
-            index += list[i].length
-        }
-    }
-    catch (e: Exception) {
-        return -1
+    for (i in 0 until list.size) {
+        index++
+        if (list[i] == list[i + 1]) return index
+        index += list[i].length
     }
     return -1
 }
