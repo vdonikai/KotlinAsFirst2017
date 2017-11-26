@@ -215,16 +215,14 @@ fun factorize(n: Int): List<Int> {
     val list = mutableListOf<Int>()
     var number = n
     var divisor = 2
-    while (isPrime(number).not()) {
+    while (number > 1) {
         if (number % divisor == 0) {
             list.add(divisor)
             number /= divisor
-            divisor = 1
         }
-        divisor++
+        else divisor++
     }
-    list.add(number)
-    return list.sorted()
+    return list
 }
 
 /**
