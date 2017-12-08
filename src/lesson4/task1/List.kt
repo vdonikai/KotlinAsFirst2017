@@ -318,4 +318,45 @@ fun roman(n: Int): String = TODO()
  * Например, 375 = "триста семьдесят пять",
  * 23964 = "двадцать три тысячи девятьсот шестьдесят четыре"
  */
-fun russian(n: Int): String = TODO()
+fun russian(n: Int): String {
+    val result = mutableListOf<String>()
+    val first = listOf("один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
+    val second = listOf("десять", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать")
+    val third = listOf("двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто")
+    val fourth = listOf("сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот")
+    val fifth = listOf("одна", "две", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять")
+    if (n < 10) {
+        result.add(first[n - 1])
+        return result.joinToString()
+    }
+    if (n % 100 > 0) {
+        if ((n % 100 > 9) && (n % 100 < 20)) {
+        result.add(second[n % 10])
+    }
+        else {
+             if (n % 100 / 10 > 0) result.add(third[n % 100 / 10 - 2])
+             if (n % 10 > 0) result.add(first[n % 10 - 1])
+        }
+    }
+    if (n > 99) {
+        if (n / 100 % 10 > 0) result.add(0, fourth[n / 100 % 10 - 1])
+    }
+    if (n > 999) {
+        if (n / 1000 % 100 > 0) {
+            if ((n / 1000 % 100 > 9) && (n / 1000 % 100 < 20)) {
+                    result.add(0, "тысяч")
+                    result.add(0, second[n / 1000 % 10])
+            }
+            else {
+                if (n / 1000 % 10 == 1) result.add(0, "тысяча")
+                else if ((n / 1000 % 10 > 1) && (n / 1000 % 10 < 5)) result.add(0, "тысячи")
+                else result.add(0, "тысяч")
+                if (n / 1000 % 10 > 0) result.add(0, fifth[n / 1000 % 10 - 1])
+                if (n / 10000 % 10 > 0) result.add(0, third[n / 10000 % 10 - 2])
+            }
+        }
+        else result.add(0, "тысяч")
+    }
+    if (n > 99999) result.add(0, fourth[n / 100000 - 1])
+    return result.joinToString(separator = " ")
+}
