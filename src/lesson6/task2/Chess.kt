@@ -38,7 +38,7 @@ data class Square(val column: Int, val row: Int) {
  */
 fun square(notation: String): Square {
     val list = notation.toList()
-    if (list.size > 2) throw IllegalArgumentException()
+    if (list.size != 2) throw IllegalArgumentException()
     val columnVar: Int
     val rowVar: Int
     when {
@@ -117,7 +117,18 @@ fun rookMoveNumber(start: Square, end: Square): Int {
  *          rookTrajectory(Square(3, 5), Square(8, 5)) = listOf(Square(3, 5), Square(8, 5))
  * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
  */
-fun rookTrajectory(start: Square, end: Square): List<Square> = TODO()
+fun rookTrajectory(start: Square, end: Square): List<Square> {
+    if (start.inside().not() || end.inside().not()) throw IllegalArgumentException()
+    val result = mutableListOf(start)
+    var rookColumn = start.column
+    var rookRow = start.row
+    while (Square(rookColumn, rookRow) != end) {
+        if (rookColumn != end.column) rookColumn = end.column
+        else if (rookRow != end.row) rookRow = end.row
+        result.add(Square(rookColumn, rookRow))
+    }
+    return result
+}
 
 /**
  * Простая
