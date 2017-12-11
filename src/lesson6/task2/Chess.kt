@@ -39,8 +39,8 @@ data class Square(val column: Int, val row: Int) {
 fun square(notation: String): Square {
     val list = notation.toList()
     if (list.size > 2) throw IllegalArgumentException()
-    var columnVar = 0
-    var rowVar = 0
+    val columnVar: Int
+    val rowVar: Int
     when {
         list[0] == 'a' -> columnVar = 1
         list[0] == 'b' -> columnVar = 2
@@ -50,6 +50,7 @@ fun square(notation: String): Square {
         list[0] == 'f' -> columnVar = 6
         list[0] == 'g' -> columnVar = 7
         list[0] == 'h' -> columnVar = 8
+        else -> throw IllegalArgumentException()
     }
     when {
         list[1] == '1' -> rowVar = 1
@@ -60,6 +61,7 @@ fun square(notation: String): Square {
         list[1] == '6' -> rowVar = 6
         list[1] == '7' -> rowVar = 7
         list[1] == '8' -> rowVar = 8
+        else -> throw IllegalArgumentException()
     }
     return Square(columnVar, rowVar)
 }
