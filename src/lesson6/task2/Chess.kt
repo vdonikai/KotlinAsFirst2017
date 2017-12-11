@@ -21,7 +21,12 @@ data class Square(val column: Int, val row: Int) {
      * В нотации, колонки обозначаются латинскими буквами от a до h, а ряды -- цифрами от 1 до 8.
      * Для клетки не в пределах доски вернуть пустую строку
      */
-    fun notation(): String = TODO()
+    fun notation(): String {
+        if (inside().not()) return ""
+        val listOfLetters = listOf("a", "b", "c", "d", "e", "f", "g", "h")
+        val columnVal = listOfLetters[column - 1]
+        return "$columnVal$row"
+    }
 }
 
 /**
@@ -31,7 +36,33 @@ data class Square(val column: Int, val row: Int) {
  * В нотации, колонки обозначаются латинскими буквами от a до h, а ряды -- цифрами от 1 до 8.
  * Если нотация некорректна, бросить IllegalArgumentException
  */
-fun square(notation: String): Square = TODO()
+fun square(notation: String): Square {
+    val list = notation.toList()
+    if (list.size > 2) throw IllegalArgumentException()
+    var columnVar = 0
+    var rowVar = 0
+    when {
+        list[0] == 'a' -> columnVar = 1
+        list[0] == 'b' -> columnVar = 2
+        list[0] == 'c' -> columnVar = 3
+        list[0] == 'd' -> columnVar = 4
+        list[0] == 'e' -> columnVar = 5
+        list[0] == 'f' -> columnVar = 6
+        list[0] == 'g' -> columnVar = 7
+        list[0] == 'h' -> columnVar = 8
+    }
+    when {
+        list[1] == '1' -> rowVar = 1
+        list[1] == '2' -> rowVar = 2
+        list[1] == '3' -> rowVar = 3
+        list[1] == '4' -> rowVar = 4
+        list[1] == '5' -> rowVar = 5
+        list[1] == '6' -> rowVar = 6
+        list[1] == '7' -> rowVar = 7
+        list[1] == '8' -> rowVar = 8
+    }
+    return Square(columnVar, rowVar)
+}
 
 /**
  * Простая
@@ -56,7 +87,19 @@ fun square(notation: String): Square = TODO()
  * Пример: rookMoveNumber(Square(3, 1), Square(6, 3)) = 2
  * Ладья может пройти через клетку (3, 3) или через клетку (6, 1) к клетке (6, 3).
  */
-fun rookMoveNumber(start: Square, end: Square): Int = TODO()
+fun rookMoveNumber(start: Square, end: Square): Int {
+    if (start.inside().not() || end.inside().not()) throw IllegalArgumentException()
+    if (start == end) return 0
+    var rookColumn = start.column
+    var rookRow = start.row
+    var count = 0
+    while (Square(rookColumn, rookRow) != end) {
+        if (rookColumn != end.column) rookColumn = end.column
+        else if (rookRow != end.row) rookRow = end.row
+        count++
+    }
+    return count
+}
 
 /**
  * Средняя
