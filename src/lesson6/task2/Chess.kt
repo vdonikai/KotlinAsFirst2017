@@ -195,7 +195,39 @@ fun bishopTrajectory(start: Square, end: Square): List<Square> = TODO()
  * Пример: kingMoveNumber(Square(3, 1), Square(6, 3)) = 3.
  * Король может последовательно пройти через клетки (4, 2) и (5, 2) к клетке (6, 3).
  */
-fun kingMoveNumber(start: Square, end: Square): Int = TODO()
+fun kingMoveNumber(start: Square, end: Square): Int {
+    if (start.inside().not() || end.inside().not()) throw IllegalArgumentException()
+    if (start == end) return 0
+    var count = 0
+    var kingColumn = start.column
+    var kingRow = start.row
+    while (Square(kingColumn, kingRow) != end) {
+        when {
+            kingColumn > end.column && kingRow > end.row -> {
+                kingColumn--
+                kingRow--
+            }
+            kingColumn < end.column && kingRow < end.row -> {
+                kingColumn++
+                kingRow++
+            }
+            kingColumn > end.column && kingRow < end.row -> {
+                kingColumn--
+                kingRow++
+            }
+            kingColumn < end.column && kingRow > end.row -> {
+                kingColumn++
+                kingRow--
+            }
+            kingColumn > end.column -> kingColumn--
+            kingColumn < end.column -> kingColumn++
+            kingRow > end.row -> kingRow--
+            kingRow < end.row -> kingRow++
+        }
+        count++
+    }
+    return count
+}
 
 /**
  * Сложная
@@ -211,7 +243,38 @@ fun kingMoveNumber(start: Square, end: Square): Int = TODO()
  *          kingTrajectory(Square(3, 5), Square(6, 2)) = listOf(Square(3, 5), Square(4, 4), Square(5, 3), Square(6, 2))
  * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
  */
-fun kingTrajectory(start: Square, end: Square): List<Square> = TODO()
+fun kingTrajectory(start: Square, end: Square): List<Square> {
+    if (start.inside().not() || end.inside().not()) throw IllegalArgumentException()
+    val result = mutableListOf(start)
+    var kingColumn = start.column
+    var kingRow = start.row
+    while (Square(kingColumn, kingRow) != end) {
+        when {
+            kingColumn > end.column && kingRow > end.row -> {
+                kingColumn--
+                kingRow--
+            }
+            kingColumn < end.column && kingRow < end.row -> {
+                kingColumn++
+                kingRow++
+            }
+            kingColumn > end.column && kingRow < end.row -> {
+                kingColumn--
+                kingRow++
+            }
+            kingColumn < end.column && kingRow > end.row -> {
+                kingColumn++
+                kingRow--
+            }
+            kingColumn > end.column -> kingColumn--
+            kingColumn < end.column -> kingColumn++
+            kingRow > end.row -> kingRow--
+            kingRow < end.row -> kingRow++
+        }
+        result.add(Square(kingColumn, kingRow))
+    }
+    return result
+}
 
 /**
  * Сложная
