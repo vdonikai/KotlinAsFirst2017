@@ -70,7 +70,67 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    TODO()
+    val writer = File(outputName).bufferedWriter()
+    for (line in File(inputName).readLines()) {
+        val list = line.split(" ").toMutableList()
+        for (i in 0 until list.size) {
+            var word = list[i]
+            when {
+                "шю" in word || "чю" in word || "жю" in word || "щю" in word ||
+                "Шю" in word || "Чю" in word || "Жю" in word || "Щю" in word -> {
+                    val chars = word.toMutableList()
+                    for (k in 0 until chars.size) {
+                        if (chars[k] == 'ю') chars[k] = 'у'
+                    }
+                    word = chars.joinToString(separator = "")
+                }
+                "шы" in word || "чы" in word || "жы" in word || "щы" in word ||
+                "Шы" in word || "Чы" in word || "Жы" in word || "Щы" in word -> {
+                    val chars = word.toMutableList()
+                    for (k in 0 until chars.size) {
+                        if (chars[k] == 'ы') chars[k] = 'и'
+                    }
+                    word = chars.joinToString(separator = "")
+                }
+                "шя" in word || "чя" in word || "жя" in word || "щя" in word ||
+                "Шя" in word || "Чя" in word || "Жя" in word || "Щя" in word -> {
+                    val chars = word.toMutableList()
+                    for (k in 0 until chars.size) {
+                        if (chars[k] == 'я') chars[k] = 'а'
+                    }
+                    word = chars.joinToString(separator = "")
+                }
+                "шЮ" in word || "чЮ" in word || "жЮ" in word || "щЮ" in word ||
+                "ШЮ" in word || "ЧЮ" in word || "ЖЮ" in word || "ЩЮ" in word -> {
+                    val chars = word.toMutableList()
+                    for (k in 0 until chars.size) {
+                        if (chars[k] == 'Ю') chars[k] = 'У'
+                    }
+                    word = chars.joinToString(separator = "")
+                }
+                "шЫ" in word || "чЫ" in word || "жЫ" in word || "щЫ" in word ||
+                "ШЫ" in word || "ЧЫ" in word || "ЖЫ" in word || "ЩЫ" in word -> {
+                    val chars = word.toMutableList()
+                    for (k in 0 until chars.size) {
+                        if (chars[k] == 'Ы') chars[k] = 'И'
+                    }
+                    word = chars.joinToString(separator = "")
+                }
+                "шЯ" in word || "чЯ" in word || "жЯ" in word || "щЯ" in word ||
+                "ШЯ" in word || "ЧЯ" in word || "ЖЯ" in word || "ЩЯ" in word -> {
+                    val chars = word.toMutableList()
+                    for (k in 0 until chars.size) {
+                        if (chars[k] == 'Я') chars[k] = 'А'
+                    }
+                    word = chars.joinToString(separator = "")
+                }
+            }
+            list[i] = word
+        }
+        writer.write(list.joinToString(separator = " "))
+        writer.newLine()
+    }
+    writer.close()
 }
 
 /**

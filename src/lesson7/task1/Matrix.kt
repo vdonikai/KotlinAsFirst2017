@@ -38,10 +38,7 @@ interface Matrix<E> {
  * height = высота, width = ширина, e = чем заполнить элементы.
  * Бросить исключение IllegalArgumentException, если height или width <= 0.
  */
-fun <E> createMatrix(height: Int, width: Int, e: E): Matrix<E> {
-    if (height <= 0 || width <= 0) throw IllegalArgumentException()
-    return MatrixImpl(height, width, e)
-}
+fun <E> createMatrix(height: Int, width: Int, e: E): Matrix<E> = TODO()
 
 /**
  * Средняя сложность
@@ -49,44 +46,19 @@ fun <E> createMatrix(height: Int, width: Int, e: E): Matrix<E> {
  * Реализация интерфейса "матрица"
  */
 class MatrixImpl<E>(override val height: Int, override val width: Int, e: E) : Matrix<E> {
-    private val map = mutableMapOf<Cell, E>()
 
-    override fun get(row: Int, column: Int): E = map[Cell(row, column)]!!
+    override fun get(row: Int, column: Int): E = TODO()
 
-    override fun get(cell: Cell): E  = map[cell]!!
+    override fun get(cell: Cell): E  = TODO()
 
-    override fun set(row: Int, column: Int, value: E) {
-        map[Cell(row, column)] = value
-    }
+    override fun set(row: Int, column: Int, value: E) = TODO()
 
-    override fun set(cell: Cell, value: E) {
-        map[cell] = value
-    }
+    override fun set(cell: Cell, value: E) = TODO()
 
-    override fun equals(other: Any?) =
-            other is MatrixImpl<*> &&
-            height == other.height &&
-            width == other.width
+    override fun equals(other: Any?) = TODO()
 
-    override fun toString(): String {
-        val sb = StringBuilder()
-        sb.append("[")
-        for (row in 0 until height) {
-            sb.append("[")
-            for (column in 0 until width) {
-                sb.append(this[row, column])
-            }
-            sb.append("]")
-        }
-        sb.append("]")
-        return "$sb"
-    }
+    override fun toString(): String = TODO()
 
-    override fun hashCode(): Int {
-        var result = 5
-        result = 31 * result + width
-        result = 31 * result + height
-        return result
-    }
+    override fun hashCode(): Int = TODO()
 }
 
