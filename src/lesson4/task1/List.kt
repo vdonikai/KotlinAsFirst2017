@@ -212,14 +212,13 @@ fun factorize(n: Int): List<Int> {
     val list = mutableListOf<Int>()
     var number = n
     var divisor = 2
-    while (divisor < 8) {
+    while (number > 1) {
         if (number % divisor == 0) {
             list.add(divisor)
             number /= divisor
         }
         else divisor++
     }
-    if (number > 1) list.add(number)
     return list
 }
 
