@@ -192,14 +192,11 @@ fun polynom(p: List<Double>, x: Double): Double {
  */
 fun accumulate(list: MutableList<Double>): MutableList<Double> {
     if (list.isEmpty()) return list
-    for (i in (list.size-1) downTo 1) {
-        var sum = 0.0
-        var k = i
-        while (k >= 0) {
-            sum += list[k]
-            k--
-        }
+    var sum = list.sum()
+    for (i in (list.size-1) downTo 0) {
+        val k = list[i]
         list[i] = sum
+        sum -= k
     }
     return list
 }
@@ -215,13 +212,14 @@ fun factorize(n: Int): List<Int> {
     val list = mutableListOf<Int>()
     var number = n
     var divisor = 2
-    while (number > 1) {
+    while (divisor < 8) {
         if (number % divisor == 0) {
             list.add(divisor)
             number /= divisor
         }
         else divisor++
     }
+    if (number > 1) list.add(number)
     return list
 }
 
