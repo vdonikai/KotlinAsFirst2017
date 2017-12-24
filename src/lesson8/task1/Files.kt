@@ -80,7 +80,8 @@ fun sibilants(inputName: String, outputName: String) {
                 "Шю" in word || "Чю" in word || "Жю" in word || "Щю" in word -> {
                     val chars = word.toMutableList()
                     for (k in 0 until chars.size) {
-                        if (chars[k] == 'ю') chars[k] = 'у'
+                        if (chars[k] == 'ю' && (chars[k - 1].toLowerCase() == 'ш' || chars[k - 1].toLowerCase() == 'ч' ||
+                                chars[k - 1].toLowerCase() == 'ж' || chars[k - 1].toLowerCase() == 'щ')) chars[k] = 'у'
                     }
                     word = chars.joinToString(separator = "")
                 }
@@ -88,7 +89,8 @@ fun sibilants(inputName: String, outputName: String) {
                 "Шы" in word || "Чы" in word || "Жы" in word || "Щы" in word -> {
                     val chars = word.toMutableList()
                     for (k in 0 until chars.size) {
-                        if (chars[k] == 'ы') chars[k] = 'и'
+                        if (chars[k] == 'ы' && (chars[k - 1].toLowerCase() == 'ш' || chars[k - 1].toLowerCase() == 'ч' ||
+                                chars[k - 1].toLowerCase() == 'ж' || chars[k - 1].toLowerCase() == 'щ')) chars[k] = 'и'
                     }
                     word = chars.joinToString(separator = "")
                 }
@@ -96,7 +98,8 @@ fun sibilants(inputName: String, outputName: String) {
                 "Шя" in word || "Чя" in word || "Жя" in word || "Щя" in word -> {
                     val chars = word.toMutableList()
                     for (k in 0 until chars.size) {
-                        if (chars[k] == 'я') chars[k] = 'а'
+                        if (chars[k] == 'я' && (chars[k - 1].toLowerCase() == 'ш' || chars[k - 1].toLowerCase() == 'ч' ||
+                                chars[k - 1].toLowerCase() == 'ж' || chars[k - 1].toLowerCase() == 'щ')) chars[k] = 'а'
                     }
                     word = chars.joinToString(separator = "")
                 }
@@ -104,7 +107,8 @@ fun sibilants(inputName: String, outputName: String) {
                 "ШЮ" in word || "ЧЮ" in word || "ЖЮ" in word || "ЩЮ" in word -> {
                     val chars = word.toMutableList()
                     for (k in 0 until chars.size) {
-                        if (chars[k] == 'Ю') chars[k] = 'У'
+                        if (chars[k] == 'Ю' && (chars[k - 1].toLowerCase() == 'ш' || chars[k - 1].toLowerCase() == 'ч' ||
+                                chars[k - 1].toLowerCase() == 'ж' || chars[k - 1].toLowerCase() == 'щ')) chars[k] = 'У'
                     }
                     word = chars.joinToString(separator = "")
                 }
@@ -112,7 +116,8 @@ fun sibilants(inputName: String, outputName: String) {
                 "ШЫ" in word || "ЧЫ" in word || "ЖЫ" in word || "ЩЫ" in word -> {
                     val chars = word.toMutableList()
                     for (k in 0 until chars.size) {
-                        if (chars[k] == 'Ы') chars[k] = 'И'
+                        if (chars[k] == 'Ы' && (chars[k - 1].toLowerCase() == 'ш' || chars[k - 1].toLowerCase() == 'ч' ||
+                                chars[k - 1].toLowerCase() == 'ж' || chars[k - 1].toLowerCase() == 'щ')) chars[k] = 'И'
                     }
                     word = chars.joinToString(separator = "")
                 }
@@ -120,7 +125,8 @@ fun sibilants(inputName: String, outputName: String) {
                 "ШЯ" in word || "ЧЯ" in word || "ЖЯ" in word || "ЩЯ" in word -> {
                     val chars = word.toMutableList()
                     for (k in 0 until chars.size) {
-                        if (chars[k] == 'Я') chars[k] = 'А'
+                        if (chars[k] == 'Я' && (chars[k - 1].toLowerCase() == 'ш' || chars[k - 1].toLowerCase() == 'ч' ||
+                                chars[k - 1].toLowerCase() == 'ж' || chars[k - 1].toLowerCase() == 'щ')) chars[k] = 'А'
                     }
                     word = chars.joinToString(separator = "")
                 }
