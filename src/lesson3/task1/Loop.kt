@@ -183,7 +183,8 @@ fun revert(n: Int): Int {
     var numberRevert = 0
     var number = n
     for (i in 1..count) {
-        numberRevert += (number % 10) * pow(10.0,(count-i).toDouble()).toInt()
+        val num = number % 10
+        numberRevert = numberRevert * 10 + num
         number /= 10
     }
     return numberRevert
