@@ -219,7 +219,7 @@ fun factorize(n: Int): List<Int> {
         }
         else divisor++
     }
-    list.add(number)
+    if (number > 1) list.add(number)
     return list
 }
 
