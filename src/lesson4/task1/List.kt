@@ -242,8 +242,14 @@ fun convert(n: Int, base: Int): List<Int> {
     val list = mutableListOf<Int>()
     var num = n
     while (num > 0) {
-        list.add(0, (num % base))
+        list.add(num % base)
         num /= base
+    }
+    val listSize = list.size - 1
+    for (i in 0 until list.size/2) {
+        val x = list[i]
+        list[i] = list[listSize - i]
+        list[listSize - i] = x
     }
     return list
 }
@@ -258,18 +264,14 @@ fun convert(n: Int, base: Int): List<Int> {
  */
 fun convertToString(n: Int, base: Int): String {
     if (n == 0) return "0"
-    val latinChars = listOf("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r",
-            "s", "t", "u", "v", "w", "x", "y", "z")
-    val list = mutableListOf<String>()
-    var num = n
-    while (num >= 1) {
-        var digit: String
-        if (num % base < 10) digit = (num % base).toString()
-        else digit = latinChars[(num % base) - 10]
-        list.add(0, digit)
-        num /= base
+    val latinChars = "abcdefghijklmnopqrstuvwxyz".toList()
+    val list = convert(n, base)
+    val listResult = mutableListOf<String>()
+    for (i in 0 until list.size) { listResult.add(list[i].toString()) }
+    for (i in 0 until list.size) {
+        if (list[i] > 9) listResult[i] = latinChars[list[i] - 10].toString()
     }
-    return list.joinToString(separator = "")
+    return listResult.joinToString(separator = "")
 }
 
 /**
