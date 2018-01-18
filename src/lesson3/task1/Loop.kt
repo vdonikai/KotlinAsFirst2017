@@ -201,7 +201,7 @@ fun isPalindrome(n: Int): Boolean {
     val count = (n.toString()).length
     for (i in 1..count) {
         val num1 = (n / pow(10.0,(count-i).toDouble()).toInt()) % 10
-        val num2 = (n % pow(10.0,i.toDouble()).toInt()) / pow(10.0,(i-1).toDouble()).toInt()
+        val num2 = (n / pow(10.0,(i-1).toDouble()).toInt()) % 10
         if (num1 != num2) return false
     }
     return true
