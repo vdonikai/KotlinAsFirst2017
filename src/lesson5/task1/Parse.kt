@@ -145,24 +145,23 @@ fun bestHighJump(jumps: String): Int = TODO()
 fun plusMinus(expression: String): Int {
     val sums = expression.split(" - ")
     val firstSumArray = sums[0].split(" + ")
-    var plusNum = 0
-    var minusNum = 0
+    var result = 0
     try {
         for (number in firstSumArray) {
-            plusNum += number.toInt()
+            result += number.toInt()
         }
-        for (number in 1 until sums.size) {
-            val numbers = sums[number].split(" + ")
-            minusNum -= numbers[0].toInt()
-            for (i in 1 until numbers.size) {
-                plusNum += numbers[i].toInt()
+        for (i in 1 until sums.size) {
+            val sum = sums[i].split(" + ")
+            result -= sum[0].toInt()
+            for (k in 1 until sum.size) {
+                result += sum[k].toInt()
             }
         }
     }
     catch (e: Exception) {
         throw IllegalArgumentException()
     }
-    return plusNum + minusNum
+    return result
 }
 
 /**
