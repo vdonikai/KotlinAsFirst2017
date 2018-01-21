@@ -231,28 +231,10 @@ fun kingTrajectory(start: Square, end: Square): List<Square> {
     var kingColumn = start.column
     var kingRow = start.row
     while (Square(kingColumn, kingRow) != end) {
-        when {
-            kingColumn > end.column && kingRow > end.row -> {
-                kingColumn--
-                kingRow--
-            }
-            kingColumn < end.column && kingRow < end.row -> {
-                kingColumn++
-                kingRow++
-            }
-            kingColumn > end.column && kingRow < end.row -> {
-                kingColumn--
-                kingRow++
-            }
-            kingColumn < end.column && kingRow > end.row -> {
-                kingColumn++
-                kingRow--
-            }
-            kingColumn > end.column -> kingColumn--
-            kingColumn < end.column -> kingColumn++
-            kingRow > end.row -> kingRow--
-            kingRow < end.row -> kingRow++
-        }
+        if (kingColumn > end.column) kingColumn--
+        if (kingColumn < end.column) kingColumn++
+        if (kingRow > end.row) kingRow--
+        if (kingRow < end.row) kingRow++
         result.add(Square(kingColumn, kingRow))
     }
     return result
