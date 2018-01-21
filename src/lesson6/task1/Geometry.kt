@@ -105,22 +105,7 @@ data class Segment(val begin: Point, val end: Point) {
  * Дано множество точек. Вернуть отрезок, соединяющий две наиболее удалённые из них.
  * Если в множестве менее двух точек, бросить IllegalArgumentException
  */
-fun diameter(vararg points: Point): Segment {
-    if (points.size < 2) throw IllegalArgumentException()
-    var maxLength = 0.0
-    var pointFirst = points [0]
-    var pointSecond = points[1]
-    for (i in 0 until points.size) {
-        for (k in 0 until points.size) {
-            if (points[i].distance(points[k]) > maxLength) {
-                maxLength = points[i].distance(points[k])
-                pointFirst = points[i]
-                pointSecond = points[k]
-            }
-        }
-    }
-    return Segment(pointFirst, pointSecond)
-}
+fun diameter(vararg points: Point): Segment = TODO()
 
 /**
  * Простая
@@ -128,13 +113,7 @@ fun diameter(vararg points: Point): Segment {
  * Построить окружность по её диаметру, заданному двумя точками
  * Центр её должен находиться посередине между точками, а радиус составлять половину расстояния между ними
  */
-fun circleByDiameter(diameter: Segment): Circle {
-    val radius = Math.sqrt(sqr(diameter.begin.x - diameter.end.x) + sqr(diameter.begin.y - diameter.end.y)) / 2
-    val xHalfDistance = Math.abs(diameter.begin.x - diameter.end.x) / 2
-    val yHalfDistance = Math.abs(diameter.begin.y - diameter.end.y) / 2
-    val center = Point((Math.max(diameter.begin.x, diameter.end.x) - xHalfDistance), (Math.max(diameter.begin.y, diameter.end.y) - yHalfDistance))
-    return Circle(center, radius)
-}
+fun circleByDiameter(diameter: Segment): Circle = TODO()
 
 /**
  * Прямая, заданная точкой point и углом наклона angle (в радианах) по отношению к оси X.
