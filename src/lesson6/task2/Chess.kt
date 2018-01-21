@@ -23,7 +23,7 @@ data class Square(val column: Int, val row: Int) {
      */
     fun notation(): String {
         if (inside().not()) return ""
-        val listOfLetters = listOf("a", "b", "c", "d", "e", "f", "g", "h")
+        val listOfLetters = "abcdefgh".toList()
         val columnVal = listOfLetters[column - 1]
         return "$columnVal$row"
     }
@@ -202,28 +202,10 @@ fun kingMoveNumber(start: Square, end: Square): Int {
     var kingColumn = start.column
     var kingRow = start.row
     while (Square(kingColumn, kingRow) != end) {
-        when {
-            kingColumn > end.column && kingRow > end.row -> {
-                kingColumn--
-                kingRow--
-            }
-            kingColumn < end.column && kingRow < end.row -> {
-                kingColumn++
-                kingRow++
-            }
-            kingColumn > end.column && kingRow < end.row -> {
-                kingColumn--
-                kingRow++
-            }
-            kingColumn < end.column && kingRow > end.row -> {
-                kingColumn++
-                kingRow--
-            }
-            kingColumn > end.column -> kingColumn--
-            kingColumn < end.column -> kingColumn++
-            kingRow > end.row -> kingRow--
-            kingRow < end.row -> kingRow++
-        }
+        if (kingColumn > end.column) kingColumn--
+        if (kingColumn < end.column) kingColumn++
+        if (kingRow > end.row) kingRow--
+        if (kingRow < end.row) kingRow++
         count++
     }
     return count
