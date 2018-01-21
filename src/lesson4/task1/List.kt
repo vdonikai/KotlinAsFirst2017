@@ -246,13 +246,7 @@ fun convert(n: Int, base: Int): List<Int> {
         list.add(num % base)
         num /= base
     }
-    val listSize = list.size - 1
-    for (i in 0 until list.size/2) {
-        val x = list[i]
-        list[i] = list[listSize - i]
-        list[listSize - i] = x
-    }
-    return list
+    return list.reversed()
 }
 
 /**
@@ -268,9 +262,9 @@ fun convertToString(n: Int, base: Int): String {
     val latinChars = "abcdefghijklmnopqrstuvwxyz".toList()
     val list = convert(n, base)
     val listResult = mutableListOf<String>()
-    for (i in 0 until list.size) { listResult.add(list[i].toString()) }
     for (i in 0 until list.size) {
-        if (list[i] > 9) listResult[i] = latinChars[list[i] - 10].toString()
+        if (list[i] > 9) listResult.add(latinChars[list[i] - 10].toString())
+        else listResult.add(list[i].toString())
     }
     return listResult.joinToString(separator = "")
 }
