@@ -23,7 +23,7 @@ data class Square(val column: Int, val row: Int) {
      */
     fun notation(): String {
         if (inside().not()) return ""
-        val listOfLetters = "abcdefgh".toList()
+        val listOfLetters = "abcdefgh"
         val columnVal = listOfLetters[column - 1]
         return "$columnVal$row"
     }
