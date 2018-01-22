@@ -91,14 +91,9 @@ fun square(notation: String): Square {
 fun rookMoveNumber(start: Square, end: Square): Int {
     if (start.inside().not() || end.inside().not()) throw IllegalArgumentException()
     if (start == end) return 0
-    var rookColumn = start.column
-    var rookRow = start.row
     var count = 0
-    while (Square(rookColumn, rookRow) != end) {
-        if (rookColumn != end.column) rookColumn = end.column
-        else if (rookRow != end.row) rookRow = end.row
-        count++
-    }
+    if (start.column != end.column) count++
+    if (start.row != end.row) count++
     return count
 }
 
@@ -120,12 +115,11 @@ fun rookTrajectory(start: Square, end: Square): List<Square> {
     if (start.inside().not() || end.inside().not()) throw IllegalArgumentException()
     val result = mutableListOf(start)
     var rookColumn = start.column
-    var rookRow = start.row
-    while (Square(rookColumn, rookRow) != end) {
-        if (rookColumn != end.column) rookColumn = end.column
-        else if (rookRow != end.row) rookRow = end.row
-        result.add(Square(rookColumn, rookRow))
+    if (start.column != end.column) {
+        result.add(Square(end.column, start.row))
+        rookColumn = end.column
     }
+    if (start.row != end.row) result.add(Square(rookColumn, end.row))
     return result
 }
 
