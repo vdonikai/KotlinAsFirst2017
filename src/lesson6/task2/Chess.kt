@@ -37,30 +37,29 @@ data class Square(val column: Int, val row: Int) {
  * Если нотация некорректна, бросить IllegalArgumentException
  */
 fun square(notation: String): Square {
-    val list = notation.toList()
-    if (list.size != 2) throw IllegalArgumentException()
+    if (notation.length != 2) throw IllegalArgumentException()
     val columnVar: Int
     val rowVar: Int
     when {
-        list[0] == 'a' -> columnVar = 1
-        list[0] == 'b' -> columnVar = 2
-        list[0] == 'c' -> columnVar = 3
-        list[0] == 'd' -> columnVar = 4
-        list[0] == 'e' -> columnVar = 5
-        list[0] == 'f' -> columnVar = 6
-        list[0] == 'g' -> columnVar = 7
-        list[0] == 'h' -> columnVar = 8
+        notation[0] == 'a' -> columnVar = 1
+        notation[0] == 'b' -> columnVar = 2
+        notation[0] == 'c' -> columnVar = 3
+        notation[0] == 'd' -> columnVar = 4
+        notation[0] == 'e' -> columnVar = 5
+        notation[0] == 'f' -> columnVar = 6
+        notation[0] == 'g' -> columnVar = 7
+        notation[0] == 'h' -> columnVar = 8
         else -> throw IllegalArgumentException()
     }
     when {
-        list[1] == '1' -> rowVar = 1
-        list[1] == '2' -> rowVar = 2
-        list[1] == '3' -> rowVar = 3
-        list[1] == '4' -> rowVar = 4
-        list[1] == '5' -> rowVar = 5
-        list[1] == '6' -> rowVar = 6
-        list[1] == '7' -> rowVar = 7
-        list[1] == '8' -> rowVar = 8
+        notation[1] == '1' -> rowVar = 1
+        notation[1] == '2' -> rowVar = 2
+        notation[1] == '3' -> rowVar = 3
+        notation[1] == '4' -> rowVar = 4
+        notation[1] == '5' -> rowVar = 5
+        notation[1] == '6' -> rowVar = 6
+        notation[1] == '7' -> rowVar = 7
+        notation[1] == '8' -> rowVar = 8
         else -> throw IllegalArgumentException()
     }
     return Square(columnVar, rowVar)
@@ -203,9 +202,9 @@ fun kingMoveNumber(start: Square, end: Square): Int {
     var kingRow = start.row
     while (Square(kingColumn, kingRow) != end) {
         if (kingColumn > end.column) kingColumn--
-        if (kingColumn < end.column) kingColumn++
+        else if (kingColumn < end.column) kingColumn++
         if (kingRow > end.row) kingRow--
-        if (kingRow < end.row) kingRow++
+        else if (kingRow < end.row) kingRow++
         count++
     }
     return count
@@ -232,9 +231,9 @@ fun kingTrajectory(start: Square, end: Square): List<Square> {
     var kingRow = start.row
     while (Square(kingColumn, kingRow) != end) {
         if (kingColumn > end.column) kingColumn--
-        if (kingColumn < end.column) kingColumn++
+        else if (kingColumn < end.column) kingColumn++
         if (kingRow > end.row) kingRow--
-        if (kingRow < end.row) kingRow++
+        else if (kingRow < end.row) kingRow++
         result.add(Square(kingColumn, kingRow))
     }
     return result
